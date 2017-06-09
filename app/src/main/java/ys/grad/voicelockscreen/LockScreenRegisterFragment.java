@@ -50,7 +50,8 @@ public class LockScreenRegisterFragment extends Fragment {
             regiTextView.setText(getString(R.string.assign_finish));
             homeButton.setVisibility(View.VISIBLE);
         }else{
-            countRecordedNumView.setText(recordedNum+"/5");
+            String text = recordedNum+"/5";
+            countRecordedNumView.setText(text);
         }
         return v;
     }
@@ -74,9 +75,8 @@ public class LockScreenRegisterFragment extends Fragment {
                 //start to check identity
                 regiTextView.setText(getString(R.string.assign_talk));
                 Log.d(TAG, "onClick: start");
-                RecordThread recordThread = new RecordThread(getActivity(), microphonButton, false, recordedNum);
+                Thread recordThread = new Thread(new RecordRunnable(getActivity(), microphonButton, false, recordedNum));
                 recordThread.start();
-
             }
         });
     }

@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class LockScreenAuthFragment extends Fragment {
 ImageView microphonButton;
     TextView authTextView;
-    String TAG ="ys.grad.voicelockscreen.LockScreenAuthFragment";
+    String TAG ="LockScreenAuthFragment";
 
     public LockScreenAuthFragment() {
     }
@@ -50,7 +50,7 @@ ImageView microphonButton;
                 authTextView.setText(getString(R.string.auth_talk));
                 //start to check identity
                 Log.d(TAG, "onClick: start");
-                RecordThread recordThread =new RecordThread(getActivity(),microphonButton,true,-1);
+                Thread recordThread = new Thread(new RecordRunnable(getActivity(),microphonButton,true,-1));
                 recordThread.start();
 
             }
